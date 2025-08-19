@@ -27,11 +27,17 @@ const upload = multer({
   fileFilter: fileFilter
 });
 
-router.post('/', upload.array('photos', 10), (req, res) => {
-  if (!req.files) {
-    return res.status(400).json({ error: 'No files uploaded.' });
-  }
-  res.json({ files: req.files.map(f => ({ filename: f.filename, url: `/uploads/${f.filename}` })) });
+router.post('/', (req, res, next) => {
+  upload.array('photos', 10)(req, res, function (err) {
+    if (err) {
+      // Multer error or other error
+      return res.status(400).json({ error: err.message || 'Upload failed.' });
+    }
+    if (!req.files || req.files.length === 0) {
+      return res.status(400).json({ error: 'No files uploaded.' });
+    }
+    res.json({ files: req.files.map(f => ({ filename: f.filename, url: `/uploads/${f.filename}` })) });
+  });
 });
 
 module.exports = router;
