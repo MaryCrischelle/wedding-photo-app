@@ -4,15 +4,22 @@ fetch('/api/gallery')
   .then(data => {
     if (data.images && data.images.length) {
       data.images.forEach(url => {
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = url.split('/').pop();
-        link.className = 'block';
+        const wrapper = document.createElement('div');
+        wrapper.className = 'flex flex-col items-center';
+
         const img = document.createElement('img');
         img.src = url;
-        img.className = 'w-full h-32 object-cover rounded-lg';
-        link.appendChild(img);
-        galleryGrid.appendChild(link);
+        img.className = 'w-full h-32 object-cover rounded-lg mb-2';
+        wrapper.appendChild(img);
+
+        const downloadBtn = document.createElement('a');
+        downloadBtn.href = url;
+        downloadBtn.download = url.split('/').pop();
+        downloadBtn.className = 'px-3 py-1 bg-blue-400 text-white rounded shadow text-sm mb-2';
+        downloadBtn.innerText = 'Download';
+        wrapper.appendChild(downloadBtn);
+
+        galleryGrid.appendChild(wrapper);
       });
     } else {
       galleryGrid.innerHTML = '<p class="col-span-4 text-blue-700">No photos uploaded yet.</p>';
