@@ -1,0 +1,13 @@
+{
+  "name": "wedding-photo-upload",
+  "version": "1.0.0",
+  "description": "Responsive wedding photo upload website",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+  "multer": "latest"
+  }
+}
