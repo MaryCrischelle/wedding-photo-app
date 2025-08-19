@@ -18,11 +18,12 @@ function loadGallery() {
           img.className = 'w-full h-32 object-cover rounded-lg mb-2';
           wrapper.appendChild(img);
 
-          const downloadBtn = document.createElement('a');
-          downloadBtn.href = url;
-          downloadBtn.download = url.split('/').pop();
+          const downloadBtn = document.createElement('button');
           downloadBtn.className = 'px-3 py-1 bg-blue-400 text-white rounded shadow text-sm mb-2';
           downloadBtn.innerText = 'Download';
+          downloadBtn.onclick = () => {
+            window.open(url, '_blank');
+          };
           wrapper.appendChild(downloadBtn);
 
           galleryGrid.appendChild(wrapper);
