@@ -1,6 +1,5 @@
 const galleryGrid = document.getElementById('galleryGrid');
 const refreshBtn = document.getElementById('refreshGallery');
-const saveAllBtn = document.getElementById('saveAll');
 let currentImages = [];
 
 function loadGallery() {
@@ -33,17 +32,6 @@ function loadGallery() {
       }
     });
 }
-saveAllBtn.addEventListener('click', () => {
-  if (!currentImages.length) return;
-  currentImages.forEach(url => {
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = url.split('/').pop();
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  });
-});
 
 refreshBtn.addEventListener('click', loadGallery);
 window.addEventListener('DOMContentLoaded', loadGallery);
